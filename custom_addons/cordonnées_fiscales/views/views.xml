@@ -1,0 +1,60 @@
+<odoo>
+  <data>
+    <!-- explicit list view definition -->
+<!--
+    <record model="ir.ui.view" id="hci.list">
+      <field name="name">hci list</field>
+      <field name="model">hci.hci</field>
+      <field name="arch" type="xml">
+        <tree>
+          <field name="name"/>
+          <field name="value"/>
+          <field name="value2"/>
+        </tree>
+      </field>
+    </record>
+-->
+
+    <!-- actions opening views on models -->
+<!--
+    <record model="ir.actions.act_window" id="hci.action_window">
+      <field name="name">hci window</field>
+      <field name="res_model">hci.hci</field>
+      <field name="view_mode">tree,form</field>
+    </record>
+-->
+
+    <!-- server action to the one above -->
+<!--
+    <record model="ir.actions.server" id="hci.action_server">
+      <field name="name">hci server</field>
+      <field name="model_id" ref="model_hci_hci"/>
+      <field name="state">code</field>
+      <field name="code">
+        action = {
+          "type": "ir.actions.act_window",
+          "view_mode": "tree,form",
+          "res_model": model._name,
+        }
+      </field>
+    </record>
+-->
+
+    <!-- Top menu item -->
+<!--
+    <menuitem name="hci" id="hci.menu_root"/>
+-->
+    <!-- menu categories -->
+<!--
+    <menuitem name="Menu 1" id="hci.menu_1" parent="hci.menu_root"/>
+    <menuitem name="Menu 2" id="hci.menu_2" parent="hci.menu_root"/>
+-->
+    <!-- actions -->
+<!--
+    <menuitem name="List" id="hci.menu_1_list" parent="hci.menu_1"
+              action="hci.action_window"/>
+    <menuitem name="Server to list" id="hci" parent="hci.menu_2"
+              action="hci.action_server"/>
+-->
+  </data>
+</odoo>

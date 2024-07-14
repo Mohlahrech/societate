@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <data>
+        <record id="res_partner_view_form" model="ir.ui.view">
+                <field name="name">res.partner.form.inherit</field>
+                <field name="model">res.partner</field>
+                <field name="inherit_id" ref="base.view_partner_form"/>
+                <field name="arch" type="xml">
+                    <xpath expr="//field[@name='name']" position="attributes">
+                        <attribute name="filter_domain">['|', ('name', 'ilike', self), ('id_nat', 'ilike', self)]</attribute>
+                    </xpath>
+                    <xpath expr="//field[@name='company_type']" position="attributes">
+                        <attribute name="attrs">{'readonly': [('readonly_partner','=', True)]}</attribute>
+                    </xpath>
+                    <xpath expr="//field[@name='company_type']" position="after">
+                        <field name="entity" invisible="1"/>
+                        <field name="readonly_partner" invisible="1"/>
+
+<!--                        <div attrs="{'invisible': [('company_type','=', 'person')]}" groups="profils_cherry.group_agent_commercial">-->
+<!--                            <label for="entity" string="Entité juridique"/>-->
+<!--                            <field name="entity" readonly="1"/>-->
+<!--                        </div>-->
+                        <div attrs="{'invisible': [('company_type','=', 'person')]}" groups="profils_cherry.group_change_entity_company">
+                            <label for="entity" string="Entité juridique"/>
+                            <field name="entity"/>
+                        </div>
+                    </xpath>
+
+                    <xpath expr="//page[@name='sales_purchases']" position="before">
+                            <page string="Cordonnées">
+                                <group>
+                                    <field name="customer" invisible="1"/>
+                                    <field name="supplier" invisible="1"/>
+                                    <field name="birth_date" attrs="{'invisible': [('company_type', '=', 'company')], 'required': [('company_type','=','person'), ('customer', '=', True), ('supplier', '=', False)],'readonly': [('readonly_partner','=', True)]}"/>
+                                    <field name="id_nat" attrs="{'invisible': [('company_type', '=', 'company')], 'required': [('company_type','=','person'), ('customer', '=', True), ('supplier', '=', False)],'readonly': [('readonly_partner','=', True)]}" force_save="1"/>
+                                    <field name="id_nat_import" attrs="{'invisible': [('company_type', '=', 'company')]}"/>
+                                </group>
+                                 <group>
+                                <field name="nif" attrs="{'readonly': [('readonly_partner','=', True)],'invisible': [('company_type', '=', 'person')], 'required': ['&amp;',('company_type','=','company'),('entity','=','private')]}"/>
+                                <field name="nif_import" attrs="{'invisible': [('company_type', '=', 'person')]}"/>
+                                <field name="nis"  attrs="{'readonly': [('readonly_partner','=', True)],'invisible': [('company_type', '=', 'person')], 'required': ['&amp;',('company_type','=','company'),('entity','=','private')]}"/>
+                                <field name="nis_import"  attrs="{'invisible': [('company_type', '=', 'person')]}"/>
+                                <field name="ai"  attrs="{'readonly': [('readonly_partner','=', True)],'invisible': [('company_type', '=', 'person')], 'required': ['&amp;',('company_type','=','company'),('entity','=','private')]}"/>
+                                <field name="ai_import"  attrs="{'invisible': [('company_type', '=', 'person')]}"/>
+								<field name="rc"  attrs="{'readonly': [('readonly_partner','=', True)],'invisible': [('company_type', '=', 'person')], 'required': ['&amp;',('company_type','=','company'),('entity','=','private')]}"/>
+                                <field name="rc_import"  attrs="{'invisible': [('company_type', '=', 'person')]}"/>
+
+                            </group>
+
+                            </page>
+
+                    </xpath>
+
+                </field>
+        </record>
+         <record id="view_sale_order_inherit" model="ir.ui.view">
+            <field name="name">view.sale_order.inherit</field>
+            <field name="model">sale.order</field>
+            <field name="inherit_id" ref="sale.view_order_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='partner_id']" position="after">
+                    <field name="id_nat"/>
+                    <field name="company_type" invisible="1"/>
+                </xpath>
+
+            </field>
+         </record>
+    </data>
+</odoo>
