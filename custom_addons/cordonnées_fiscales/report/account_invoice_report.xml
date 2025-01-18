@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <data>
+        <template id="fiscal_infos">
+            <div>
+                <div>NIF :
+                    <span t-field="o.partner_id.nif"/>
+                </div>
+                <div>NIS :
+                    <span t-field="o.partner_id.nis"/>
+                </div>
+                <div>RC :
+                    <span t-field="o.partner_id.rc"/>
+                </div>
+                <div>AI :
+                    <span t-field="o.partner_id.ai"/>
+                </div>
+            </div>
+        </template>
+
+        <template id="report_invoice_document_fiscal" inherit_id="account.report_invoice_document">
+            <div t-if="o.partner_id.vat" id="partner_vat_address_not_same_as_shipping" position="replace">
+                <t t-call="cordonnées_fiscales.fiscal_infos"/>
+            </div>
+
+            <div t-if="o.partner_id.vat" id="partner_vat_address_same_as_shipping" position="replace">
+                <t t-call="cordonnées_fiscales.fiscal_infos"/>
+            </div>
+
+            <div t-if="o.partner_id.vat" id="partner_vat_no_shipping" position="replace">
+                <t t-call="cordonnées_fiscales.fiscal_infos"/>
+            </div>
+
+        </template>
+    </data>
+</odoo>

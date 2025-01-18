@@ -20,13 +20,14 @@
     'version': '0.1',
 
     # any module necessary for this one to work correctly
-    'depends':  ['base'],
+    'depends':  ['base', 'account', 'contacts','sale'],
 
     # always loaded
     'data': [
         # 'security/ir.model.access.csv',
-        # 'views/res_partner_inherit.xml',
+        'views/res_partner_inherit.xml',
         'views/res_company_inherit.xml',
+        'report/account_invoice_report.xml',
     ],
     # only loaded in demonstration mode
     'demo': [
