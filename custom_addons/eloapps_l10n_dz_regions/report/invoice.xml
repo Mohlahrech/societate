@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <data>
+
+
+        <template id="report_invoice_document_wilaya" inherit_id="cordonnées_fiscales.fiscal_infos">
+            <xpath expr="//div[div/span[@t-field='o.partner_id.nif']]" position="before">
+                 <!-- Wilaya Field -->
+                <t t-if="o.partner_id.state_id">
+                    <div>Wilaya:
+                        <span t-field="o.partner_id.state_id"/>
+                    </div>
+                </t>
+                <!-- Commune Field -->
+                <t t-if="o.partner_id.commune_id">
+                    <div>Commune:
+                        <span t-field="o.partner_id.commune_id"/>
+                    </div>
+                </t>
+            </xpath>
+
+
+        </template>
+    </data>
+</odoo>
